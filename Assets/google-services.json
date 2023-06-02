@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "619670750832",
+    "project_id": "mobile-game-play",
+    "storage_bucket": "mobile-game-play.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619670750832:android:28317f75dfa6d1b2b8d6b5",
+        "android_client_info": {
+          "package_name": "com.jeep.drving.offroad.games"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619670750832-ljvaevoeoat553m7rejoqklto53vdvvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJel_VyIuE-zKF3ozu4Ks8cHaimsZ2GwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619670750832-ljvaevoeoat553m7rejoqklto53vdvvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619670750832:android:38aa31a415d8afffb8d6b5",
+        "android_client_info": {
+          "package_name": "com.mini.car.racing.stunt.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619670750832-ljvaevoeoat553m7rejoqklto53vdvvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJel_VyIuE-zKF3ozu4Ks8cHaimsZ2GwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619670750832-ljvaevoeoat553m7rejoqklto53vdvvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -35,7 +35,7 @@ public class MainMenuListner : MonoBehaviour
         //set_StatusTutorial();
 
 
-        // NoAdsButtonHandling();
+        NoAdsButtonHandling();
         UpdateTxts();
     }
 
@@ -90,8 +90,10 @@ public class MainMenuListner : MonoBehaviour
 
     public void NoAdsButtonHandling()
     {
-        //if (Toolbox.DB.Prefs.NoAdsPurchased)
-        //    noAdsButton.GetComponent<Button>().interactable = false;
+        if (Constants.Getprefs(Constants.removeAds) == 1)
+            noAdsButton.SetActive(false);   
+        else
+            noAdsButton.SetActive(true);
     }
 
 

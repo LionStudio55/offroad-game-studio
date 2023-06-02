@@ -11,8 +11,6 @@ public class LevelsThumbnail
 {
     public Sprite[] thumbnails;
 }
-
-
 public class LevelSelectionListner : MonoBehaviour
 {
     MediationHandler mediation;
@@ -59,20 +57,20 @@ public class LevelSelectionListner : MonoBehaviour
     public void RefreshView()
     {
         InitLevelButtonsState();
-        //CheckStatus_UnlockallLevels();
+        CheckStatus_UnlockallLevels();
+        Megaoffer();
         UpdateTxts();
     }
     private void Megaoffer()
     {
-        if (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)] - 1)
+        if (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)] - 1 && Constants.Getprefs(Constants.removeAds) == 1)
         {
-            UnlockallLevelsInapps.SetActive(false);
+            UnlockallBtn.SetActive(false);
         }
         else
         {
-            UnlockallLevelsInapps.SetActive(true);
+            UnlockallBtn.SetActive(true);
         }
-        CancelInvoke(nameof(Megaoffer));
     }
     public void UpdateTxts()
     {
@@ -84,11 +82,11 @@ public class LevelSelectionListner : MonoBehaviour
     {
         if (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)] - 1)
         {
-            UnlockallBtn.SetActive(false);
+            UnlockallLevelsInapps.SetActive(false);
         }
         else
         {
-            UnlockallBtn.SetActive(true);
+            UnlockallLevelsInapps.SetActive(true);
         }
 
     }

@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: f6190f2d34454c59917a4c1305f171d3
 labels:
 - gvh
-- gvh_version-7.4.1
+- gvh_version-7.0.1
 - gvhp_exportpath-Plugins/Android/googlemobileads-unity.aar
 PluginImporter:
   externalObjects: {}
@@ -15,18 +15,6 @@ PluginImporter:
   isExplicitlyReferenced: 0
   validateReferences: 1
   platformData:
-  - first:
-      : Linux
-    second:
-      enabled: 1
-      settings:
-        CPU: x86
-  - first:
-      : LinuxUniversal
-    second:
-      enabled: 1
-      settings:
-        CPU: AnyCPU
   - first:
       : OSXIntel
     second:
@@ -69,7 +57,31 @@ PluginImporter:
         DefaultValueInitialized: true
         OS: AnyOS
   - first:
+      Facebook: Win
+    second:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+  - first:
+      Facebook: Win64
+    second:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+  - first:
+      Standalone: Linux
+    second:
+      enabled: 1
+      settings:
+        CPU: x86
+  - first:
       Standalone: Linux64
+    second:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+  - first:
+      Standalone: LinuxUniversal
     second:
       enabled: 1
       settings:
@@ -85,13 +97,13 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        CPU: x86
+        CPU: AnyCPU
   - first:
       Standalone: Win64
     second:
       enabled: 1
       settings:
-        CPU: x86_64
+        CPU: AnyCPU
   - first:
       Windows Store Apps: WindowsStoreApps
     second:
@@ -100,13 +112,6 @@ PluginImporter:
         CPU: AnyCPU
   - first:
       iPhone: iOS
-    second:
-      enabled: 0
-      settings:
-        CompileFlags: 
-        FrameworkDependencies: 
-  - first:
-      tvOS: tvOS
     second:
       enabled: 0
       settings:

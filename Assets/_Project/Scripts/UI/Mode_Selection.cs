@@ -1,5 +1,4 @@
 using System;
-using UIAnimatorCore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,20 +23,19 @@ public class Mode_Selection : MonoBehaviour
 
     private void OnEnable()
     {
-       
+
         if (!PlayerPrefs.HasKey("ModesUnlocked"))
         {
-          //  print("FIRST");
+            //  print("FIRST");
             PlayerPrefsX.SetBoolArray("ModesUnlocked", ModesUnlocked);
         }
         else
         {
-           // print("nOTFIRST");
+            // print("nOTFIRST");
             ModesUnlocked = PlayerPrefsX.GetBoolArray("ModesUnlocked");
         }
-       // ModesUnlockstatus();
+        // ModesUnlockstatus();
         Updatestats();
-        //  Invoke(nameof(Megaoffer),1f);
         LoadInterstitial();
     }
     private void Start()
@@ -46,11 +44,10 @@ public class Mode_Selection : MonoBehaviour
     }
     private void Megaoffer()
     {
-        if (AreAllModesUnlocked())
+        if (AreAllModesUnlocked() && Constants.Getprefs(Constants.removeAds) == 1)
             UnlockAllEverythingInapps.SetActive(false);
         else
             UnlockAllEverythingInapps.SetActive(true);
-        CancelInvoke(nameof(Megaoffer));
     }
     private void OnDisable()
     {
@@ -63,14 +60,14 @@ public class Mode_Selection : MonoBehaviour
         daimondTxt.text = Constants.Getprefs(Constants.Daimond).ToString();
         InitGunsButtonsState();
         Hover[Constants.Getprefs(Constants.lastselectedMode)].SetActive(true);
-        //if (AreAllModesUnlocked())
-        //    UnlockAllModesBtn.SetActive(false);
-        //else
-        //    UnlockAllModesBtn.SetActive(true);
-
+        if (AreAllModesUnlocked())
+            UnlockAllModesBtn.SetActive(false);
+        else
+            UnlockAllModesBtn.SetActive(true);
+        Megaoffer();
 
     }
-    
+
     private void InitGunsButtonsState()
     {
 
@@ -97,10 +94,10 @@ public class Mode_Selection : MonoBehaviour
             {
                 Hover[i].SetActive(false);
                 locks[i].SetActive(false);
-               // Modebtn[i].GetComponent<UIAnimator>().enabled = true;
-               
+                // Modebtn[i].GetComponent<UIAnimator>().enabled = true;
+
             }
-           
+
             else
             {
                 Hover[i].SetActive(false);
@@ -108,14 +105,14 @@ public class Mode_Selection : MonoBehaviour
                 //Modebtn[i].GetComponent<UIAnimator>().enabled = false;
             }
         }
-       
+
     }
     public void ModesUnlockstatus()
     {
 
-        if (Constants.Getprefs(Constants.lastselectedMode) == 0 && (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 4 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode))<14) && Constants.Getprefs(Constants.Mode2Unlock) == 0)
+        if (Constants.Getprefs(Constants.lastselectedMode) == 0 && (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 4 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) < 14) && Constants.Getprefs(Constants.Mode2Unlock) == 0)
         {
-           
+
             locks[1].SetActive(false);
             ModesUnlocked[1] = true;
             Constants.SetPref(Constants.lastselectedMode, Get_LastUnlockedMode());
@@ -130,13 +127,13 @@ public class Mode_Selection : MonoBehaviour
         }
         else if (Constants.Getprefs(Constants.lastselectedMode) == 1 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 4 && Constants.Getprefs(Constants.Mode3Unlock) == 0)
         {
-            
+
             locks[2].SetActive(false);
             ModesUnlocked[2/*Get_LastlockedMode()*/] = true;
             Constants.SetPref(Constants.lastselectedMode, Get_LastUnlockedMode());
             PlayerPrefsX.SetBoolArray("ModesUnlocked", ModesUnlocked);
             print("Mode Unlock Third");
-           // Updatestats();
+            // Updatestats();
             Constants.SetPref(Constants.Mode2Unlock, 1);
             Constants.SetPref(Constants.Mode3Unlock, 1);
             UIManager.Instance.MessagePopup.SetActive(true);
@@ -144,15 +141,15 @@ public class Mode_Selection : MonoBehaviour
             UIManager.Instance.MessagePopup.GetComponent<MessageListner>().set_statuspanel();
         }
 
-         else if (Constants.Getprefs(Constants.lastselectedMode) == 1 && (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 9 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) < 19) && Constants.Getprefs(Constants.Mode4Unlock) == 0)
+        else if (Constants.Getprefs(Constants.lastselectedMode) == 1 && (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 9 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) < 19) && Constants.Getprefs(Constants.Mode4Unlock) == 0)
         {
-           
+
             locks[3/*Get_LastlockedMode()*/].SetActive(false);
             ModesUnlocked[3/*Get_LastlockedMode()*/] = true;
             Constants.SetPref(Constants.lastselectedMode, Get_LastUnlockedMode());
             PlayerPrefsX.SetBoolArray("ModesUnlocked", ModesUnlocked);
             print("Mode Unlock Fourth");
-           // Updatestats();
+            // Updatestats();
             //Constants.SetPref(Constants.Mode2Unlock, 1);
             //Constants.SetPref(Constants.Mode3Unlock, 1);
             Constants.SetPref(Constants.Mode4Unlock, 1);
@@ -160,7 +157,7 @@ public class Mode_Selection : MonoBehaviour
             UIManager.Instance.MessagePopup.GetComponent<MessageListner>().UpdateTxt("Congratulations your Fourth Mode Unlock Enjoy with This Fantasic Mode ", "Congratulations");
             UIManager.Instance.MessagePopup.GetComponent<MessageListner>().set_statuspanel();
         }
-         else if (Constants.Getprefs(Constants.lastselectedMode) == 3 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 4 && Constants.Getprefs(Constants.Mode5Unlock) == 0)
+        else if (Constants.Getprefs(Constants.lastselectedMode) == 3 && Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) >= 4 && Constants.Getprefs(Constants.Mode5Unlock) == 0)
         {
             locks[1].SetActive(false);
             ModesUnlocked[1] = true;
@@ -171,7 +168,7 @@ public class Mode_Selection : MonoBehaviour
             Constants.SetPref(Constants.lastselectedMode, Get_LastUnlockedMode());
             PlayerPrefsX.SetBoolArray("ModesUnlocked", ModesUnlocked);
             print("Mode Unlock Fifth");
-           // Updatestats();
+            // Updatestats();
             //Constants.SetPref(Constants.Mode2Unlock, 1);
             //Constants.SetPref(Constants.Mode3Unlock, 1);
             Constants.SetPref(Constants.Mode4Unlock, 1);
@@ -224,7 +221,7 @@ public class Mode_Selection : MonoBehaviour
         {
             if (!ModesUnlocked[i])
             {
-                return i-1 ;
+                return i - 1;
             }
         }
         return ModesUnlocked.Length - 1;
@@ -234,7 +231,7 @@ public class Mode_Selection : MonoBehaviour
     {
         for (int i = 0; i < ModesUnlocked.Length; i++)
         {
-                //print("i" +i);
+            //print("i" +i);
             if (!ModesUnlocked[i])
             {
                 return i;
@@ -248,7 +245,7 @@ public class Mode_Selection : MonoBehaviour
     {
         Constants.SetPref(Constants.Totalvideoswatched, Constants.Getprefs(Constants.Totalvideoswatched) + 1);
         print("NoofwatchvideoforUnlockvideo :" + (NoofwatchvideoforUnlockvideo[Get_LastlockedMode()]) + " Totalvideoswatched :" + Constants.Getprefs(Constants.Totalvideoswatched));
-        VideosText[Get_LastlockedMode()].text = "watch "+ (NoofwatchvideoforUnlockvideo[Get_LastlockedMode()]- Constants.Getprefs(Constants.Totalvideoswatched)) + " video to Unlock this MODE ";
+        VideosText[Get_LastlockedMode()].text = "watch " + (NoofwatchvideoforUnlockvideo[Get_LastlockedMode()] - Constants.Getprefs(Constants.Totalvideoswatched)) + " video to Unlock this MODE ";
 
         if (Constants.Getprefs(Constants.Totalvideoswatched) >= NoofwatchvideoforUnlockvideo[Get_LastlockedMode()])
         {
@@ -282,14 +279,14 @@ public class Mode_Selection : MonoBehaviour
                 UIManager.Instance.MessagePopup.GetComponent<MessageListner>().UpdateTxt("Congratulations your Fifth Mode Unlock Enjoy with This Fantasic Mode ", "Congratulations");
                 UIManager.Instance.MessagePopup.GetComponent<MessageListner>().set_statuspanel();
             }
-            Constants.SetPref(Constants.Totalvideoswatched,0);
+            Constants.SetPref(Constants.Totalvideoswatched, 0);
             locks[Get_LastlockedMode()].SetActive(false);
             ModesUnlocked[Get_LastlockedMode()] = true;
             Constants.SetPref(Constants.lastselectedMode, Get_LastUnlockedMode());
             PlayerPrefsX.SetBoolArray("ModesUnlocked", ModesUnlocked);
             Updatestats();
         }
-        
+
     }
     #region button Press
     public void DisplayMsg(int Mode_)
@@ -329,14 +326,14 @@ public class Mode_Selection : MonoBehaviour
 
     public void Selected_Mode(int index)
     {
-      
+
         Constants.SetPref(Constants.lastselectedMode, index);
         for (int i = 0; i < Modebtn.Length; i++)
         {
-          //  Modebtn[i].GetComponent<UIAnimator>().enabled = false;
+            //  Modebtn[i].GetComponent<UIAnimator>().enabled = false;
             Hover[i].gameObject.SetActive(false);
         }
-     //   Modebtn[index].GetComponent<UIAnimator>().enabled = true;
+        //   Modebtn[index].GetComponent<UIAnimator>().enabled = true;
         Hover[index].gameObject.SetActive(true);
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.buttonPress);
 
@@ -358,7 +355,7 @@ public class Mode_Selection : MonoBehaviour
     }
     private void Level_selection()
     {
-       // print("Level_selection");
+        // print("Level_selection");
         UIManager.Instance.UIDummy_Loading.SetActive(false);
         UIManager.Instance.ShowNextUI();
     }

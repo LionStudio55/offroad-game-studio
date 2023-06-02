@@ -15,13 +15,18 @@ public class ShowBanner : MonoBehaviour
             {
                 if (bannnerposition == Pos.Center)
                 {
-                  // if (FindObjectOfType<MediationHandler>().IsSmallBannerReady())
-                        FindObjectOfType<MediationHandler>().ShowSmallBanner(GoogleMobileAds.Api.AdPosition.Top);
+                    FindObjectOfType<MediationHandler>().ShowSmallBanner(GoogleMobileAds.Api.AdPosition.Top);
+                }
+
+                else if (bannnerposition == Pos.left)
+                {
+                    // if (FindObjectOfType<MediationHandler>().IsSmallBannerReady())
+                    FindObjectOfType<MediationHandler>().ShowSmallBanner(GoogleMobileAds.Api.AdPosition.TopLeft);
                 }
                 else
                 {
                     //if (FindObjectOfType<MediationHandler>().IsSmallBannerReady())
-                        FindObjectOfType<MediationHandler>().ShowSmallBanner(GoogleMobileAds.Api.AdPosition.TopRight);
+                    FindObjectOfType<MediationHandler>().ShowSmallBanner(GoogleMobileAds.Api.AdPosition.TopRight);
                 }
                 if (Hidemediumbanner)
                     FindObjectOfType<MediationHandler>().hideMediumBanner();

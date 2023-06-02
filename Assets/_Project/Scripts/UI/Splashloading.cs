@@ -34,13 +34,13 @@ public class Splashloading : MonoBehaviour
             return;
         index++;
         if (index == 1)
-            Assetloadingtext.text = Text[index];
+            Assetloadingtext.text = Text[0];
         else if (index == 2)
-            Assetloadingtext.text = Text[index];
+            Assetloadingtext.text = Text[1];
         else if (index == 3)
-            Assetloadingtext.text = Text[index];
+            Assetloadingtext.text = Text[2];
         else if (index == 4)
-            Assetloadingtext.text = Text[index];
+            Assetloadingtext.text = Text[3];
         else
         {
             Assetloadingtext.text = "READY";

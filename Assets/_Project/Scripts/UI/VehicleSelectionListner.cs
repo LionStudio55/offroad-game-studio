@@ -108,10 +108,10 @@ public class VehicleSelectionListner : MonoBehaviour
         if (Constants.WeaponTrialFinished)
             weapontrailfinished();
 
-        //if (AreAllCarsUnlocked())
-        //    UnlockAllCarsBtn(false);
-        //else
-        //    UnlockAllCarsBtn(true);
+        if (AreAllCarsUnlocked())
+            UnlockAllCarsBtn(false);
+        else
+            UnlockAllCarsBtn(true);
     }
     private void InitGunsButtonsState()
     {

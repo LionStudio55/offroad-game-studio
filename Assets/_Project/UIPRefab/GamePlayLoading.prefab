@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477ad1acaa50d6c4aaa34fa37e8d923f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bannnerposition: 0
+  bannnerposition: 1
   Hidemediumbanner: 0
 --- !u!114 &2056837406
 MonoBehaviour:
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263f0b99aa411004d994a71f0ebe65ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pos: 4
+  Pos: 2
 --- !u!1 &5388675073517317886
 GameObject:
   m_ObjectHideFlags: 0

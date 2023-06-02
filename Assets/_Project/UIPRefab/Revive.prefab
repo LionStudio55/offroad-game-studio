@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 6626455342388780341}
   - component: {fileID: 7988638559427625876}
   - component: {fileID: 3782289714599069739}
-  - component: {fileID: 5301322822504643264}
   m_Layer: 5
   m_Name: Revive
   m_TagString: Untagged
@@ -234,25 +233,6 @@ MonoBehaviour:
   videoBtn: {fileID: 4199302069773438579}
   coinsTxt: {fileID: 4919754440320949421}
   EnoughCoinTxt: {fileID: 526128407428590748}
---- !u!95 &5301322822504643264
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 334423484731039472}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &707958838682279104
 GameObject:
   m_ObjectHideFlags: 0

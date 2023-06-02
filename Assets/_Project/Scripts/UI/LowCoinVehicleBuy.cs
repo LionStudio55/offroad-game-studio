@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class LowCoinVehicleBuy : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class LowCoinVehicleBuy : MonoBehaviour
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
 
-        // InAppHandler.Instance.Buy_AllVehicles();
+         InAppHandler.Instance.Buy_AllVehicles();
         //Toolbox.UIManager.Shop_Panel.SetActive(true);
         //Toolbox.GameManager.InstantiateUI_Shop();
         OnPress_Close();
@@ -47,8 +48,75 @@ public class LowCoinVehicleBuy : MonoBehaviour
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
 
-        //   OnPress_Close();
+        try
+        {
+            if (FindObjectOfType<AdmobAdsManager>())
+                FindObjectOfType<AdmobAdsManager>().Adbreakloading.SetActive(true);
+            if (FindObjectOfType<MediationHandler>())
+            {
+                if (FindObjectOfType<MediationHandler>().IsRewardedAdReady())
+                {
+                    FindObjectOfType<MediationHandler>().ShowRewardedVideo(Reward);
+                }
+                else
+                {
+                    FindObjectOfType<MediationHandler>().LoadRewardedVideo();
+                    Invoke(nameof(Video), 5f);
+                }
+
+            }
+
+
+        }
+
+        catch (Exception e)
+        {
+        }
+    }
+   
+
+    private void Video()
+    {
+        if (FindObjectOfType<AdmobAdsManager>())
+            FindObjectOfType<AdmobAdsManager>().Adbreakloading.SetActive(false);
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+            {
+                if (FindObjectOfType<MediationHandler>().IsRewardedAdReady())
+                {
+                    FindObjectOfType<MediationHandler>().ShowRewardedVideo(Reward);
+                }
+                else
+                {
+                    FindObjectOfType<MediationHandler>().LoadRewardedVideo();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+        }
     }
 
+    private void Reward()
+    {
+        if (FindObjectOfType<AdmobAdsManager>())
+            FindObjectOfType<AdmobAdsManager>().Adbreakloading.SetActive(false);
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+            {
+                FindObjectOfType<MediationHandler>().LoadRewardedVideo();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        Constants.SetPref(Constants.Totalreward, Constants.Getprefs(Constants.Totalreward) + 200);
+        if (FindObjectOfType<MainMenuListner>())
+            FindObjectOfType<MainMenuListner>().UpdateTxts();
+        if (FindObjectOfType<VehicleSelectionListner>())
+            FindObjectOfType<VehicleSelectionListner>().Refreshview();
+    }
     #endregion
 }

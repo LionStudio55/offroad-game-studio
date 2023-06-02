@@ -20,8 +20,8 @@ public class SplashManager : MonoBehaviour
         {
             PrivacyPolicy.SetActive(false);
             Splash.gameObject.SetActive(true);
-            GameManager.Instance.Load_Scene(Constants.scene_Menu, 10f);
             Invoke(nameof(App_Open),9f);
+            GameManager.Instance.Load_Scene(Constants.scene_Menu, 10f);
         }
     }
 
@@ -37,5 +37,6 @@ public class SplashManager : MonoBehaviour
         {
 
         }
+        CancelInvoke(nameof(App_Open));
     }
 }
