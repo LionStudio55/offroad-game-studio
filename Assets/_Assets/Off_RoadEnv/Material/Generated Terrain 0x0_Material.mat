@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Generated Terrain 0x0_Material
+  m_Shader: {fileID: 4800000, guid: 54c662dafd03e734c83b7e3c202a632b, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _V_T2M_Control:
+        m_Texture: {fileID: 2800000, guid: 28736f0175193b947a21c9c0e547efe4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V_T2M_Splat1:
+        m_Texture: {fileID: 2800000, guid: d18bd377d45338a47bb767ff49ca5c1f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V_T2M_Splat1_bumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V_T2M_Splat2:
+        m_Texture: {fileID: 2800000, guid: 85802eac53a318647b463cb048c1639d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V_T2M_Splat2_bumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V_T2M_Splat3:
+        m_Texture: {fileID: 2800000, guid: 2db6b70eda74c4e47802c5df0142a060, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _V_T2M_Splat3_bumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _V_T2M_Splat1_uvScale: 80
+    - _V_T2M_Splat2_uvScale: 60
+    - _V_T2M_Splat3_uvScale: 20
+    - _V_T2M_Splat4_uvScale: 32.8
+    - _V_T2M_Splat5_uvScale: 16.4
+    - _V_T2M_Splat6_uvScale: 16.4
+    - _V_T2M_Splat7_uvScale: 16.4
+    m_Colors:
+    - _Color: {r: 0.7264151, g: 0.6957571, b: 0.6681648, a: 1}
