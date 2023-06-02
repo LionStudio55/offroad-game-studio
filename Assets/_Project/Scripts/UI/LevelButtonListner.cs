@@ -102,6 +102,7 @@ public class LevelButtonListner : MonoBehaviour
     public void OnPress_watchVideoUnlockLevel()
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.buttonPress);
+        this.GetComponentInParent<LevelSelectionListner>().UnlockNextLevel_WatchVideo();
         //if (FindObjectOfType<AbstractAdsmanager>())
         //{
         //    if (FindObjectOfType<AbstractAdsmanager>().IsRewardedAdReady())

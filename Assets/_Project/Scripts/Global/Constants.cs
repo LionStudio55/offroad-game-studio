@@ -60,6 +60,7 @@ public static class Constants
     #endregion
 
     #region Prefs Data 
+    public const string Lowenddevice = "Lowenddevice";
     public const string UserConsent = "UserConsent";
     public const string Headshot = "Headshot";
     public const string Bodyshot = "Bodyshot";

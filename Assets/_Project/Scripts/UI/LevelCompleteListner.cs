@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class LevelCompleteListner : MonoBehaviour
 {
-    MediationHandler mediation;
     public GameObject panel_2Buttons;
     public GameObject panel_3Buttons;
     //public GameObject doubleRewardBtn;
@@ -41,18 +40,19 @@ public class LevelCompleteListner : MonoBehaviour
         //GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
         // System.GC.Collect();
         GameplayController.Instance.HUD_Status(false);
+        SHOWInterstitialIAD();
     }
 
     private void OnDisable()
     {
         GameplayController.Instance.HUD_Status(true);
+        LoadInterstitial();
         StopAllCoroutines();
         Time.timeScale = 1;
     }
 
     private void Start()
     {
-        mediation = FindObjectOfType<MediationHandler>();
 
         //try
         //{
@@ -302,7 +302,6 @@ public class LevelCompleteListner : MonoBehaviour
     }
     public void OnPress_Next()
     {
-        LoadInterstitial();
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         Constants.FBAnalytic_EventDesign(Constants.GetCurGameModeName(Constants.Getprefs(Constants.lastselectedMode)) + "_" + Constants.Getprefs(Constants.lastselectedLevel).ToString() + "_" + "LevelComplete_Next_Pressed");
         if(Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) <= Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)] - 1)
@@ -336,7 +335,6 @@ public class LevelCompleteListner : MonoBehaviour
     }
     public void OnPress_Restart()
     {
-        LoadInterstitial();
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         Constants.FBAnalytic_EventDesign(Constants.GetCurGameModeName(Constants.Getprefs(Constants.lastselectedMode)) + "_" + Constants.Getprefs(Constants.lastselectedLevel).ToString() + "_" + "LevelComplete_Restart_Pressed");
         //Toolbox.GameManager.Call_ad_after_restart = true;
@@ -375,16 +373,28 @@ public class LevelCompleteListner : MonoBehaviour
     #endregion
     public void SHOWInterstitialIAD()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        try
         {
-            mediation.ShowInterstitial();
+            if (FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().ShowInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
         }
     }
     public void LoadInterstitial()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        try
         {
-            mediation.LoadInterstitial();
+            if (!FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().LoadInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,28 @@ public class SplashManager : MonoBehaviour
         if (!Constants.GetBoolpref(Constants.UserConsent))
         {
             PrivacyPolicy.SetActive(true);
-            //Splash.gameObject.SetActive(false);
+            Splash.gameObject.SetActive(true);
         }
         else
         {
-           // PrivacyPolicy.SetActive(false);
+            PrivacyPolicy.SetActive(false);
             Splash.gameObject.SetActive(true);
-            GameManager.Instance.Load_Scene(Constants.scene_Menu, 8f);
+            GameManager.Instance.Load_Scene(Constants.scene_Menu, 10f);
+            Invoke(nameof(App_Open),9f);
         }
     }
 
-    // Update is called once per frame
-  
+
+    private void App_Open()
+    {
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+                FindObjectOfType<MediationHandler>().ShowAppOpenAd();
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
 }

@@ -1,16 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PrivacyPolicyListner : MonoBehaviour
 {
 
     private void Start()
     {
-        //  DontDestroyOnLoad(this.gameObject);
     }
 
     private void OnDisable()
     {
-        //Toolbox.GameManager.Remove_ActiveUI(this.gameObject);
     }
     #region ButtonListner
 
@@ -19,7 +18,8 @@ public class PrivacyPolicyListner : MonoBehaviour
 
         if (!Constants.GetBoolpref(Constants.UserConsent))
         {
-           GameManager.Instance.Load_Scene(Constants.scene_Menu, 10f);
+            Invoke(nameof(App_Open), 9f);
+            GameManager.Instance.Load_Scene(Constants.scene_Menu, 10f);
         }
         else
         {
@@ -41,6 +41,7 @@ public class PrivacyPolicyListner : MonoBehaviour
     {
 
         Constants.FBAnalytic_EventDesign("PrivacyPolicy_Press_Yes");
+        //Constants.SetBoolpref(Constants.UserConsent, true);
         Close();
 
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
@@ -55,4 +56,16 @@ public class PrivacyPolicyListner : MonoBehaviour
     }
 
     #endregion
+    private void App_Open()
+    {
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+                FindObjectOfType<MediationHandler>().ShowAppOpenAd();
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
 }

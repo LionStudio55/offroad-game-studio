@@ -11,17 +11,7 @@ public class PauseListner : MonoBehaviour
 
     private void OnEnable()
     {
-        try
-        {
-            //if (FindObjectOfType<AbstractAdsmanager>())
-            //{
-            //    FindObjectOfType<AbstractAdsmanager>().LoadInterstitial();
-            //}
-        }
-        catch (Exception e)
-        {
-        }
-
+        SHOWInterstitialIAD();
         GameplayController.Instance.HUD_Status(false);
         Time.timeScale = 0;
     }
@@ -29,6 +19,7 @@ public class PauseListner : MonoBehaviour
     private void OnDisable()
     {
         Time.timeScale = 1;
+        LoadInterstitial();  
     }
 
     #region ButtonListners
@@ -64,7 +55,44 @@ public class PauseListner : MonoBehaviour
         HUDListner.Instance.ShowBanner();
         this.gameObject.SetActive(false);
         AudioListener.volume = 1;
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+            {
+                FindObjectOfType<MediationHandler>().LoadInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     #endregion
+
+    public void SHOWInterstitialIAD()
+    {
+        try
+        {
+            if (FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().ShowInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    public void LoadInterstitial()
+    {
+        try
+        {
+            if (!FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().LoadInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+    }
 }

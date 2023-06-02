@@ -66,6 +66,7 @@ public class VehicleSelectionListner : MonoBehaviour
     private void Start()
     {
         mediation = FindObjectOfType<MediationHandler>();
+        LoadInterstitial();
         // Invoke("ShowMegaOffers",1f);
         //Addressables.InitializeAsync();
 
@@ -380,7 +381,7 @@ public class VehicleSelectionListner : MonoBehaviour
     //}
     public void OnPress_Play()
     {
-        LoadInterstitial();
+       // LoadInterstitial();
         Constants.SetPref(Constants.LastSelectedVehicle, curGunIndex);
         //  Toolbox.GameManager.FBAnalytic_EventDesign("GunSelection_Press_Play");
         //  Toolbox.GameManager.Analytics_DesignEvent("GunSelection_Press_Play");
@@ -392,6 +393,7 @@ public class VehicleSelectionListner : MonoBehaviour
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.buttonPress);
 
         UIManager.Instance.ShowNextUI();
+        SHOWInterstitialIAD();
     }
 
     public void OnPress_Store()
@@ -533,9 +535,10 @@ public class VehicleSelectionListner : MonoBehaviour
     }
     public void LoadInterstitial()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        if (mediation != null)
         {
-            mediation.LoadInterstitial();
+            if (!mediation.IsInterstitialAdReady())
+                mediation.LoadInterstitial();
         }
     }
 }

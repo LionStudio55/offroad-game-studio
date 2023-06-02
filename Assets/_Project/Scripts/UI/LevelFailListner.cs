@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class LevelFailListner : MonoBehaviour
 {
-    MediationHandler mediation;
     public GameObject ReviveRewardBtn;
     public Text cashearnedTxt;
    
@@ -18,29 +17,19 @@ public class LevelFailListner : MonoBehaviour
 
     private void OnEnable()
     {
+        SHOWInterstitialIAD();
         GameplayController.Instance.HUD_Status(false);
     }
 
     private void OnDisable()
     {
+        LoadInterstitial();
         GameplayController.Instance.HUD_Status(true);
     }
 
     private void Start()
     {
-        mediation = FindObjectOfType<MediationHandler>();
-        try
-        {
-            //if (FindObjectOfType<AbstractAdsmanager>())
-            //{
-            //    FindObjectOfType<AbstractAdsmanager>().LoadInterstitial();
-            //}
-        }
-
-        catch (Exception e)
-        {
-        }
-
+       
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.levelFail);
         Constants.FBAnalytic_EventLevel_Fail(Constants.GetCurGameModeName(Constants.Getprefs(Constants.lastselectedMode)), Constants.Getprefs(Constants.lastselectedLevel));
         StartCoroutine(CR_CoinsAnimation());
@@ -124,16 +113,28 @@ public class LevelFailListner : MonoBehaviour
     }
     public void SHOWInterstitialIAD()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        try
         {
-            mediation.ShowInterstitial();
+            if (FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().ShowInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
         }
     }
     public void LoadInterstitial()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        try
         {
-            mediation.LoadInterstitial();
+            if (!FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().LoadInterstitial();
+            }
+        }
+        catch (Exception e)
+        {
         }
     }
 }

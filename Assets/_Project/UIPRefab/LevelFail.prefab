@@ -514,7 +514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -428, y: -35}
+  m_AnchoredPosition: {x: -362, y: -18}
   m_SizeDelta: {x: 710, y: 537}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1433799166894017995
@@ -650,7 +650,7 @@ MonoBehaviour:
     m_onFinishedAction:
       m_PersistentCalls:
         m_Calls: []
-  m_timer: 3.544855
+  m_timer: 3.5177937
   m_currentAnimSetupIndex: 0
   m_audioSourceContainer: {fileID: 0}
   m_audioSources: []
@@ -1402,8 +1402,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 128.32883, y: -163.79999}
-  m_SizeDelta: {x: 256.6577, y: 101.48}
+  m_AnchoredPosition: {x: 128.32883, y: -57}
+  m_SizeDelta: {x: 256.6577, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3178987323528441865
 CanvasRenderer:
@@ -1604,7 +1604,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3178987323964451868}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1614,8 +1614,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -57}
-  m_SizeDelta: {x: 711, y: 100}
+  m_AnchoredPosition: {x: 134.58997, y: -57}
+  m_SizeDelta: {x: 441.82, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3178987323964451864
 CanvasRenderer:
@@ -1808,13 +1808,15 @@ GameObject:
   - component: {fileID: 1345707453674210257}
   - component: {fileID: 1345707453674210256}
   - component: {fileID: 3400429762985853350}
+  - component: {fileID: 6877156070164153579}
+  - component: {fileID: 6877156070164153580}
   m_Layer: 5
   m_Name: LevelFail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &779333464068259194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1943,7 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd41288b47590644a07bec1233dd7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReviveRewardBtn: {fileID: 0}
+  ReviveRewardBtn: {fileID: 8121868779754179007}
   cashearnedTxt: {fileID: 3178987322717011017}
 --- !u!114 &1345707453674210257
 MonoBehaviour:
@@ -2010,7 +2012,7 @@ MonoBehaviour:
         - {fileID: 3178987323964451868}
         m_animationSteps:
         - {fileID: 3400429762985853350}
-        m_targetStepIndexes: 01000000
+        m_targetStepIndexes: 00000000
         m_uiAnimatorSubModule: {fileID: 0}
         m_startDelay: 0
         m_inspectorToggleState: 1
@@ -2034,7 +2036,7 @@ MonoBehaviour:
     m_onFinishedAction:
       m_PersistentCalls:
         m_Calls: []
-  m_timer: 2.0488827
+  m_timer: 0
   m_currentAnimSetupIndex: 1
   m_audioSourceContainer: {fileID: 0}
   m_audioSources: []
@@ -2118,7 +2120,7 @@ MonoBehaviour:
   m_pulseScale:
     m_type: 1
     m_offsettingEnabled: 0
-    m_from: 1.25
+    m_from: 1.02
     m_to: 1.25
     m_masterValues:
     - 1.25
@@ -2137,6 +2139,33 @@ MonoBehaviour:
   - {x: -0, y: 0, z: 0}
   m_targetTransforms:
   - {fileID: 3178987323964451869}
+--- !u!114 &6877156070164153579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400429762985853345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477ad1acaa50d6c4aaa34fa37e8d923f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bannnerposition: 2
+  Hidemediumbanner: 0
+--- !u!114 &6877156070164153580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400429762985853345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263f0b99aa411004d994a71f0ebe65ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pos: 4
 --- !u!1 &4118952376575467395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,7 +2418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7080638082617086485
 RectTransform:
   m_ObjectHideFlags: 0

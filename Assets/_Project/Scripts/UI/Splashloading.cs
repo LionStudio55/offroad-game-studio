@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Splashloading : MonoBehaviour
 {
+    public string[] Text;
     public Text Assetloadingtext;
     public Text LOADINDOT;
 
@@ -33,13 +34,13 @@ public class Splashloading : MonoBehaviour
             return;
         index++;
         if (index == 1)
-            Assetloadingtext.text = "LOADING ASSETS";
+            Assetloadingtext.text = Text[index];
         else if (index == 2)
-            Assetloadingtext.text = "OPTIMIZING ASSETS";
+            Assetloadingtext.text = Text[index];
         else if (index == 3)
-            Assetloadingtext.text = "PREPARING INTERFACE";
+            Assetloadingtext.text = Text[index];
         else if (index == 4)
-            Assetloadingtext.text = "ALMOST DONE";
+            Assetloadingtext.text = Text[index];
         else
         {
             Assetloadingtext.text = "READY";

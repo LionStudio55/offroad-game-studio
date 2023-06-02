@@ -2,7 +2,6 @@
 using System;
 public class UIManager : /*MonoBehaviour*/GenericSingletonClass<UIManager>
 {
-    public static UIManager INSTANCE;
     public int curUiIndex = 0;
     bool vehicleSelLoaded = false;
     private GameObject curUIObj;
@@ -33,7 +32,6 @@ public class UIManager : /*MonoBehaviour*/GenericSingletonClass<UIManager>
     public bool DirectShowingShop { get => directShowingShop; set => directShowingShop = value; }
     public override void Awake()
     {
-        INSTANCE= this;
         base.Awake();
         SoundsManager.Instance.PlayMusic_Menu();
         curUiIndex = 0;

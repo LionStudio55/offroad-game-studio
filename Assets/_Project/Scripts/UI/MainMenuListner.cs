@@ -1,7 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 //using GameAnalyticsSDK;
 
 public class MainMenuListner : MonoBehaviour
@@ -15,10 +13,10 @@ public class MainMenuListner : MonoBehaviour
     public GameObject noAdsButton;
     //public GameObject TutorialArrow;
     //public List<GameObject> Tutotialobj;
-    
+
     private void Awake()
     {
-      //  ShowBannner();
+        //  ShowBannner();
     }
     public void OnEnable()
     {
@@ -37,11 +35,11 @@ public class MainMenuListner : MonoBehaviour
         //set_StatusTutorial();
 
 
-       // NoAdsButtonHandling();
+        // NoAdsButtonHandling();
         UpdateTxts();
     }
 
-   
+
 
     private void Start()
     {
@@ -53,14 +51,15 @@ public class MainMenuListner : MonoBehaviour
         //    {
         //        if (FindObjectOfType<AbstractAdsmanager>())
         //            FindObjectOfType<AbstractAdsmanager>().ShowInterstitial();
-        //           Toolbox.GameManager.Back_to_mainmenu = false;
+        //        Toolbox.GameManager.Back_to_mainmenu = false;
         //    }
         //    catch (Exception e)
         //    {
         //        GameAnalytics.NewErrorEvent(GAErrorSeverity.Info, "MediationHandler Instance Not Found!");
-        //       //  Toolbox.GameManager.Back_to_mainmenu = false;
+        //        //  Toolbox.GameManager.Back_to_mainmenu = false;
         //    }
         //}
+        LoadInterstitial();
 
     }
 
@@ -94,15 +93,9 @@ public class MainMenuListner : MonoBehaviour
         //if (Toolbox.DB.Prefs.NoAdsPurchased)
         //    noAdsButton.GetComponent<Button>().interactable = false;
     }
-    public void ShowBannner()
-    {
-        //if (AdsManager.Instance)
-        //    AdsManager.Instance.ShowSmallBanner(GoogleMobileAds.Api.AdPosition.Top);
-        //if (FindObjectOfType<AbstractAdsmanager>())
-        //    FindObjectOfType<AbstractAdsmanager>().ShowSmallBanner(GoogleMobileAds.Api.AdPosition.Top);
-    }
 
-     public void UpdateTxts()
+
+    public void UpdateTxts()
     {
         coinsTxt.text = Constants.Getprefs(Constants.Totalreward).ToString();
         daimondTxt.text = Constants.Getprefs(Constants.Daimond).ToString();
@@ -116,8 +109,7 @@ public class MainMenuListner : MonoBehaviour
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         Constants.FBAnalytic_EventDesign("MainMenu_Press_Next");
-        UIManager.INSTANCE.UIDummy_Loading.SetActive(true);
-        LoadInterstitial();
+        UIManager.Instance.UIDummy_Loading.SetActive(true);
         //UIManager.Instance.ShowNextUI();
         //try
         //{
@@ -130,13 +122,13 @@ public class MainMenuListner : MonoBehaviour
         //    //  Toolbox.GameManager.Back_to_mainmenu = false;
         //}
         ///Toolbox.GameManager.loading_Delay(3f);
-        Invoke(nameof(Next), 7f);
+        Invoke(nameof(Next), 3f);
     }
 
     private void Next()
     {
+        UIManager.Instance.UIDummy_Loading.SetActive(false);
         UIManager.Instance.ShowNextUI();
-        UIManager.INSTANCE.UIDummy_Loading.SetActive(false);
         SHOWInterstitialIAD();
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         CancelInvoke(nameof(Next));
@@ -144,7 +136,7 @@ public class MainMenuListner : MonoBehaviour
 
     public void OnPress_Settings()
     {
-        SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks); 
+        SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         Constants.FBAnalytic_EventDesign("MainMenu_Press_Settings");
         //Toolbox.UIManager.Settings_Panel.SetActive(true);
         UIManager.Instance.Settings_Panel.SetActive(true);
@@ -154,7 +146,7 @@ public class MainMenuListner : MonoBehaviour
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         Constants.FBAnalytic_EventDesign("MainMenu_Press_RateUs");
-        Application.OpenURL(Constants.link_StoreInitial+Application.identifier);
+        Application.OpenURL(Constants.link_StoreInitial + Application.identifier);
     }
 
     public void OnPress_MoreGames()
@@ -195,7 +187,7 @@ public class MainMenuListner : MonoBehaviour
     public void OnPress_AdsScene()
     {
 
-       // Toolbox.GameManager.LoadLevel(4, false);
+        // Toolbox.GameManager.LoadLevel(4, false);
     }
     public void OnPress_RemoveAds()
     {
@@ -222,22 +214,23 @@ public class MainMenuListner : MonoBehaviour
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
         Constants.FBAnalytic_EventDesign("On_Press_Dailrewards");
-       // UIManager.Instance.DailyReward.SetActive(true);
+        // UIManager.Instance.DailyReward.SetActive(true);
 
     }
     #endregion
     public void SHOWInterstitialIAD()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        if (mediation != null)
         {
             mediation.ShowInterstitial();
         }
     }
     public void LoadInterstitial()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        if (mediation != null)
         {
-            mediation.LoadInterstitial();
+            if (!mediation.IsInterstitialAdReady())
+                mediation.LoadInterstitial();
         }
     }
 }

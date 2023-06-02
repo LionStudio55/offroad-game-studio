@@ -109,9 +109,11 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
         onpressright = false;
         if (Application.isMobilePlatform)
             RCC_Settings.Instance.mobileControllerEnabled = true;
-            check_statuscontrols();
+        check_statuscontrols();
+
+        Adload();
     }
-  
+
     public override void Awake()
     {
         base.Awake();
@@ -122,16 +124,13 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
     {
         try
         {
-            //if (FindObjectOfType<AbstractAdsmanager>())
-            //{
-            //    FindObjectOfType<AbstractAdsmanager>().LoadInterstitial();
-            //}
+            if (!FindObjectOfType<MediationHandler>().IsInterstitialAdReady())
+            {
+                FindObjectOfType<MediationHandler>().LoadInterstitial();
+            }
         }
         catch (Exception e)
         {
-            //GameAnalytics.NewErrorEvent(GAErrorSeverity.Info, "MediationHandler Not Found!");
-
-
         }
         CancelInvoke(nameof(Adload));
     }
@@ -196,16 +195,16 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
             Speed.text = speed.ToString("0");
         if (Nosfillbar)
             Nosfillbar.fillAmount = Mathf.Lerp(Nosfillbar.fillAmount, (speed / GameplayController.Instance.SelectedVehicleRccv3.maxspeed), Time.deltaTime * 2.0f);
-        
+
         if (RCC_Settings.Instance.units == RCC_Settings.Units.KMH)
-            KMHNeedleRotation = (speed*3f);
+            KMHNeedleRotation = (speed * 3f);
         else
-            KMHNeedleRotation = ((speed *3f)* 0.62f);
-        Needle.transform.eulerAngles = new Vector3(Needle.transform.eulerAngles.x, Needle.transform.eulerAngles.y, (40f-KMHNeedleRotation));
-       
+            KMHNeedleRotation = ((speed * 3f) * 0.62f);
+        Needle.transform.eulerAngles = new Vector3(Needle.transform.eulerAngles.x, Needle.transform.eulerAngles.y, (40f - KMHNeedleRotation));
+
         if (heatGauge)
         {
-         //   print("heatGauge :"+ (GameplayController.Instance.SelectedVehicleRccv3.engineHeat/110));
+            //   print("heatGauge :"+ (GameplayController.Instance.SelectedVehicleRccv3.engineHeat/110));
             heatGauge.fillAmount = (GameplayController.Instance.SelectedVehicleRccv3.engineHeat / 110f);
             if (heatGauge.fillAmount > 0.4f)
                 heatGauge.color = Color.blue;
@@ -217,7 +216,7 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
         if (fuelGauge)
         {
             //print("fuelGauge :" + ((GameplayController.Instance.SelectedVehicleRccv3.fuelTank / GameplayController.Instance.SelectedVehicleRccv3.fuelTankCapacity) * 270f)/270f);
-            fuelGauge.fillAmount = ((GameplayController.Instance.SelectedVehicleRccv3.fuelTank / GameplayController.Instance.SelectedVehicleRccv3.fuelTankCapacity) * 270f)/270f;
+            fuelGauge.fillAmount = ((GameplayController.Instance.SelectedVehicleRccv3.fuelTank / GameplayController.Instance.SelectedVehicleRccv3.fuelTankCapacity) * 270f) / 270f;
         }
     }
 
@@ -257,17 +256,17 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
             skipStartCinematicBtn.gameObject.SetActive(_val);
     }
 
-  
+
 
     public void set_StatusAicontrolsTutorial(bool _Val)
     {
-   //     AircontrolsTutorial.SetActive(_Val);
+        //     AircontrolsTutorial.SetActive(_Val);
     }
 
     public void set_StatusAicontrolsIndicators(bool _Val)
     {
-      //  AircontrolsLeftIndicator.SetActive(_Val);
-      // AircontrolsRightIndicator.SetActive(_Val);
+        //  AircontrolsLeftIndicator.SetActive(_Val);
+        // AircontrolsRightIndicator.SetActive(_Val);
     }
 
     public void set_statusLevelCounter()
@@ -291,7 +290,7 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
     public void set_StatusRadioMusic()
     {
 
-       SoundsManager.Instance.PlayMusic_Game(i);
+        SoundsManager.Instance.PlayMusic_Game(i);
         i++;
         if (i >= SoundsManager.Instance.gameBG.Length)
         {
@@ -374,7 +373,7 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
     public void OnPress_Pause()
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
-        Constants.FBAnalytic_EventDesign(Constants.GetCurGameModeName(Constants.Getprefs(Constants.lastselectedLevel)) + "_" + Constants.Getprefs(Constants.lastselectedLevel).ToString() + "Pause_sPress") ;
+        Constants.FBAnalytic_EventDesign(Constants.GetCurGameModeName(Constants.Getprefs(Constants.lastselectedLevel)) + "_" + Constants.Getprefs(Constants.lastselectedLevel).ToString() + "Pause_sPress");
         PausePanel.SetActive(true);
     }
     public void OnPress_Fail()
@@ -414,7 +413,7 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
     }
     public void OnPress_resetButton()
     {
-       GameplayController.Instance.Resetvehicle();
+        GameplayController.Instance.Resetvehicle();
     }
     #endregion
 
@@ -528,7 +527,7 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
                 Rightindicators.GetComponent<Image>().color = Color.white;
                 GameplayController.Instance.SelectedVehicleRccv3.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
             }
-            
+
         }
     }
     public void Right_Indicators()
@@ -547,6 +546,6 @@ public class HUDListner : /*MonoBehaviour*/GenericSingletonClass<HUDListner>
 
     #endregion
 
-  
+
 
 }

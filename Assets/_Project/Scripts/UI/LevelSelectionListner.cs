@@ -1,6 +1,5 @@
 ﻿//using GameAnalyticsSDK;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -53,6 +52,7 @@ public class LevelSelectionListner : MonoBehaviour
     private void Start()
     {
         mediation = FindObjectOfType<MediationHandler>();
+        LoadInterstitial();
     }
 
 
@@ -105,7 +105,7 @@ public class LevelSelectionListner : MonoBehaviour
         int lvlUnlocked = Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode));
         for (int i = 0; i < Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)]/*content.childCount*/; i++)
         {
-           // Debug.Log("InitLevelButtonsState"); 
+            // Debug.Log("InitLevelButtonsState"); 
             content.GetChild(i).gameObject.SetActive(true);
 
             LevelButtonListner btnListner = content.GetChild(i).GetComponent<LevelButtonListner>();
@@ -114,7 +114,7 @@ public class LevelSelectionListner : MonoBehaviour
             btnListner.Set_LevleNameTxt(i + 1);
             btnListner.Lock_Status(true);
 
-           
+
 
             //Watch video Btn for Unlock Next Level
             //if (!watchVideoBtnEnabled && i == lvlUnlocked+1)
@@ -130,8 +130,8 @@ public class LevelSelectionListner : MonoBehaviour
             ////hightlight last selected level
             if (i == lvlUnlocked)
             {
-              //  btnListner.check_OutlineStatus(true);
-              //  btnListner.transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = true;
+                //  btnListner.check_OutlineStatus(true);
+                //  btnListner.transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = true;
                 btnListner.Lock_Status(false);
                 btnListner.Hover_status(true);
                 //btnListner.PlayedState.SetActive(false);
@@ -139,36 +139,36 @@ public class LevelSelectionListner : MonoBehaviour
             }
             else if (i <= lvlUnlocked)
             {
-               // btnListner.check_OutlineStatus(false);
-               // btnListner.transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = false;
+                // btnListner.check_OutlineStatus(false);
+                // btnListner.transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = false;
                 btnListner.Lock_Status(false);
                 btnListner.Hover_status(false);
-               // btnListner.PlayedState.SetActive(true);
+                // btnListner.PlayedState.SetActive(true);
 
                 //  btnListner.Render.GetComponent<UIShiny>().enabled = false;
             }
             else
             {
                 //btnListner.check_OutlineStatus(false);
-              //  btnListner.transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = false;
+                //  btnListner.transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = false;
                 btnListner.Lock_Status(true);
                 btnListner.Hover_status(false);
                 //btnListner.PlayedState.SetActive(false);
                 // btnListner.Render.GetComponent<UIShiny>().enabled = false;
             }
         }
-       
+
     }
 
     #region ButtonListners
 
     public void OnPress_LevelButton(GameObject _buttonObj)
     {
-      UIManager.Instance.UIDummy_Loading.SetActive(true);
+        UIManager.Instance.UIDummy_Loading.SetActive(true);
         for (int i = 0; i < content.childCount; i++)
         {
             //content.GetChild(i).transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = false;
-          //  content.GetChild(i).GetComponent<LevelButtonListner>().check_OutlineStatus(false);
+            //  content.GetChild(i).GetComponent<LevelButtonListner>().check_OutlineStatus(false);
 
         }
         for (int i = 0; i < content.childCount; i++)
@@ -177,12 +177,12 @@ public class LevelSelectionListner : MonoBehaviour
             {
 
                 Constants.SetPref(Constants.lastselectedLevel, i);
-                
+
                 Invoke(nameof(Loadscene), 7f);
                 //  content.GetChild(i).GetComponent<LevelButtonListner>().check_OutlineStatus(true);
                 // content.GetChild(i).transform.GetChild(0).GetComponent<UIAnimatorCore.UIAnimator>().enabled = true;
-               // PlayButon.SetActive(true);
-               // loadAds();
+                // PlayButon.SetActive(true);
+                // loadAds();
                 return;
             }
         }
@@ -194,7 +194,7 @@ public class LevelSelectionListner : MonoBehaviour
         UIManager.Instance.UIDummy_Loading.SetActive(false);
         //SceneManager.LoadScene(2);
         SHOWInterstitialIAD();
-        
+
     }
     public void Levellock()
     {
@@ -226,15 +226,75 @@ public class LevelSelectionListner : MonoBehaviour
 
         try
         {
-            //if (FindObjectOfType<AbstractAdsmanager>())
-            //    FindObjectOfType<AbstractAdsmanager>().ShowRewardedVideo(RewardType.UNLOCK_NEXT_Level);
+            if (FindObjectOfType<AdmobAdsManager>())
+                FindObjectOfType<AdmobAdsManager>().Adbreakloading.SetActive(true);
+            if (FindObjectOfType<MediationHandler>())
+            {
+                if (FindObjectOfType<MediationHandler>().IsRewardedAdReady())
+                {
+                    FindObjectOfType<MediationHandler>().ShowRewardedVideo(RewardUnlocKlevel);
+                }
+                else
+                {
+                    FindObjectOfType<MediationHandler>().LoadRewardedVideo();
+                    Invoke(nameof(Video), 5f);
+                }
+
+            }
+
+
         }
 
         catch (Exception e)
         {
-            //GameAnalytics.NewErrorEvent(GAErrorSeverity.Info, "AdsManager Instance Not Found!");
         }
     }
+
+    private void Video()
+    {
+        if (FindObjectOfType<AdmobAdsManager>())
+            FindObjectOfType<AdmobAdsManager>().Adbreakloading.SetActive(false);
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+            {
+                if (FindObjectOfType<MediationHandler>().IsRewardedAdReady())
+                {
+                    FindObjectOfType<MediationHandler>().ShowRewardedVideo(RewardUnlocKlevel);
+                }
+                else
+                {
+                    FindObjectOfType<MediationHandler>().LoadRewardedVideo();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+        }
+    }
+   
+    private void RewardUnlocKlevel()
+    {
+        if (FindObjectOfType<AdmobAdsManager>())
+            FindObjectOfType<AdmobAdsManager>().Adbreakloading.SetActive(false);
+        try
+        {
+            if (FindObjectOfType<MediationHandler>())
+            {
+                FindObjectOfType<MediationHandler>().LoadRewardedVideo();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        if (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)) < Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)] - 1 && Constants.Getprefs(Constants.lastselectedLevel) >= Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode)))
+        {
+            Constants.SetPref(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode), (Constants.Getprefs(Constants.lastUnlockedLevel + Constants.Getprefs(Constants.lastselectedMode))) + 1);
+            print(" val :" + Constants.Getprefs(Constants.lastUnlockedLevel + Constants.lastselectedMode) + "_Val" + Constants.TotallevelofMode[Constants.Getprefs(Constants.lastselectedMode)]);
+        }
+        RefreshView();
+    }
+
     public void OnPress_Shop()
     {
         SoundsManager.Instance.PlaySound(SoundsManager.Instance.GameUIclicks);
@@ -270,9 +330,10 @@ public class LevelSelectionListner : MonoBehaviour
     }
     public void LoadInterstitial()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        if (mediation != null)
         {
-            mediation.LoadInterstitial();
+            if (!mediation.IsInterstitialAdReady())
+                mediation.LoadInterstitial();
         }
     }
 }

@@ -37,7 +37,8 @@ public class Mode_Selection : MonoBehaviour
         }
        // ModesUnlockstatus();
         Updatestats();
-      //  Invoke(nameof(Megaoffer),1f);
+        //  Invoke(nameof(Megaoffer),1f);
+        LoadInterstitial();
     }
     private void Start()
     {
@@ -328,7 +329,7 @@ public class Mode_Selection : MonoBehaviour
 
     public void Selected_Mode(int index)
     {
-        LoadInterstitial();
+      
         Constants.SetPref(Constants.lastselectedMode, index);
         for (int i = 0; i < Modebtn.Length; i++)
         {
@@ -417,9 +418,10 @@ public class Mode_Selection : MonoBehaviour
     }
     public void LoadInterstitial()
     {
-        if (mediation != null && (PlayerPrefs.GetInt("RemoveAds") != 1))
+        if (mediation != null)
         {
-            mediation.LoadInterstitial();
+            if (!mediation.IsInterstitialAdReady())
+                mediation.LoadInterstitial();
         }
     }
 }
